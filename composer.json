@@ -1,3 +1,8 @@
 {
-    
+    "repositories": [
+        {
+            "url": "https://github.com/Eturnus-team/eturnus.git",
+            "type": "git"
+        }
+    ]
 }
