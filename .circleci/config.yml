@@ -6,6 +6,18 @@ jobs:
       - checkout
       - php/install-php:
           version: '7.0'
+      - run:
+          name: "Test target availability"
+          command: |
+            ssh -o StrictHostKeyChecking=no $SSH_HOST 'echo test';
+      - run: 
+          name: "Deploy"
+          command: |
+            zip back.zip -r .;
+            chmod +x ./install.sh;
+            scp -o StrictHostKeyChecking=no back.zip $SSH_HOST:back.zip;
+            scp -o StrictHostKeyChecking=no install.sh $SSH_HOST:install.sh;
+            ssh -o StrictHostKeyChecking=no $SSH_HOST './install.sh';
 orbs:
   php: circleci/php@1.1.0
 version: 2.1
